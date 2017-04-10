@@ -1,0 +1,41 @@
+body {
+    font-family: 'Microsoft Yahei', sans-serif;
+    background: #eee;
+}
+
+.bs-sidenav li {
+    padding-left: 2px;
+	margin-left: 0;
+}
+.bs-sidenav .active {
+	font-weight: 700;
+	color: #563d7c;
+	background-color: transparent;
+	padding-left: 0;
+	border-left: 2px solid #563d7c;
+}
+.bs-sidenav a {
+	color: #333;
+}
+.bs-sidenav li:hover a {
+    background-color: transparent;
+}
+
+.control-title {
+    margin-top: 0;
+}
+
+#score-bar .progress-bar, #timer-bar .progress-bar {
+	-webkit-transition: none;
+    -o-transition: none;
+    transition: none;
+}
+.btn {
+	margin: 5px 0;
+}
+#timer-bar {
+	margin-bottom: 0;
+}
+#question-text, .option {
+	argin-bottom: 30px; outline: 0;
+}
