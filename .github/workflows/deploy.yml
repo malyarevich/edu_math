@@ -23,6 +23,21 @@ jobs:
           aws-region: ${{ env.AWS_REGION }}
       - name: Upload Files to S3
         run: aws s3 sync ./html s3://${{env.S3BUCKET}}/  --exclude '.git*' --acl public-read
+  s3_website:
+    name: Webiste to Amazon S3
+    runs-on: ubuntu-latest
+    # These permissions are needed to interact with GitHub's OIDC Token endpoint.
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v2
+        name: Checkout Repository
+      - uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
       - name: Website Files to S3
         run: aws s3 website s3://${{env.S3BUCKET}}/ --index-document index.html --error-document login.html
         
