@@ -23,6 +23,15 @@ jobs:
           aws-region: ${{ env.AWS_REGION }}
       - name: Upload Files to S3
         run: aws s3 sync ./html s3://${{env.S3BUCKET}}/  --exclude '.git*' --acl public-read
+
+name: website to S3
+on:
+  workflow_run:
+    workflows: ["Copy to S3"]
+    types: [requested]
+env:
+  AWS_REGION: eu-central-1
+  S3BUCKET: malyarevich-website-bucket
   s3_website:
     name: Webiste to Amazon S3
     runs-on: ubuntu-latest
