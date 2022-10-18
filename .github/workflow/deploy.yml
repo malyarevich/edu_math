@@ -23,3 +23,4 @@ jobs:
           aws-region: ${{ env.AWS_REGION }}
       - name: Upload Files to S3
         run: aws s3 sync . s3://${{env.S3BUCKET}}/  --exclude '.git*'
+        run: aws s3 website s3://${{env.S3BUCKET}/ --index-document html/index.html --error-document html login.html
