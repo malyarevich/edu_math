@@ -22,6 +22,7 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.AWS_REGION }}
       - name: Upload Files to S3
-        run: aws s3 sync . s3://${{env.S3BUCKET}}/  --exclude '.git*' --acl public-read /
-          aws s3 website s3://${{env.S3BUCKET}/ --index-document html/index.html --error-document html login.html
+        run: aws s3 sync ./html s3://${{env.S3BUCKET}}/  --exclude '.git*' --acl public-read
+      - name: Website Files to S3
+        run: aws s3 website s3://${{env.S3BUCKET}/ --index-document index.html --error-document login.html
         
