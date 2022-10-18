@@ -1,13 +1,13 @@
-name: Copy to S3
+name: Website to S3
 on:
-  push:
-    branches: [ "master" ]
+  workflow_run:
+    workflows: ["Copy to S3"]
+    types: [requested]
 env:
   AWS_REGION: eu-central-1
   S3BUCKET: malyarevich-website-bucket
-jobs:
-  s3_deploy:
-    name: Upload to Amazon S3
+  s3_website:
+    name: Webiste to Amazon S3
     runs-on: ubuntu-latest
     # These permissions are needed to interact with GitHub's OIDC Token endpoint.
     permissions:
@@ -21,6 +21,6 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.AWS_REGION }}
-      - name: Upload Files to S3
-        run: aws s3 sync ./html s3://${{env.S3BUCKET}}/  --exclude '.git*' --acl public-read
-
+      - name: Website Files to S3
+        run: aws s3 website s3://${{env.S3BUCKET}}/ --index-document index.html --error-document login.html
+        
