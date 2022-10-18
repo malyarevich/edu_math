@@ -6,7 +6,7 @@ env:
   AWS_REGION: eu-central-1
   S3BUCKET: malyarevich-website-bucket
 jobs:
-  build:
+  s3_deploy:
     name: Upload to Amazon S3
     runs-on: ubuntu-latest
     # These permissions are needed to interact with GitHub's OIDC Token endpoint.
